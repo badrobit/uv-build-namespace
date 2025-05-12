@@ -1,0 +1,52 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.7.3,<0.8" ]
+
+[project]
+name = "matsbrain-root"
+version = "0.0.0"
+description = "mats brain monorepo"
+readme = "README.md"
+
+authors = [
+  { name = "Mat Roscoe", email = "mat.roscoe@gmail.com" },
+]
+requires-python = ">=3.13,<=3.14"
+
+dependencies = [
+  "fake_library",
+  "fake_service"
+]
+
+# TODO: figure out why these aren't added to all subprojects... 
+[dependency-groups]
+dev = [
+]
+test = [
+    "pytest>=8.3"
+]
+
+[tool.uv]
+default-groups = [
+  "dev",
+  "test",
+]
+
+# Don't build anything for the root pyproject.toml just using it to ensure similar dependencies
+# across all sub-packages. 
+package = false 
+
+[tool.uv.workspace]
+members = [
+  "libraries/fake_library", 
+  "services/fake_service"
+]
+
+[[tool.uv.index]]
+name = "PyPI"
+url = "https://pypi.org/simple/"
+default = true
+
+[tool.uv.sources]
+fake_library = { workspace = true }
+fake_service = { workspace = true }

@@ -1,0 +1,30 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.7.3,<0.8" ]
+
+[project]
+name = "fake-service"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.13,<=3.14"
+dependencies = [
+    "fake-library"
+]
+
+[project.scripts]
+matsbrain = "matsbrain.fake_service:main"
+
+[tool.uv.build-backend]
+module-root = "matsbrain"
+module-name = "fake_service" 
+
+[tool.uv]
+package = true
+
+
+# TODO: figure out how to disable sdist builds with uv build backend 
+# [tool.hatch.build.targets.wheel]
+# include = [
+#   "matsbrain",
+# ]
